@@ -1,0 +1,26 @@
+# run create_submission to generate a submission file.
+
+task: DOMAIN_ADAPTATION
+account_name: "harish.k.kamath@gmail.com"
+# Change this to your unique method name. Max 25 chars.
+unique_method_name: "Cascade RCNN 50D"
+
+authors: "Harish"
+authors: "Aman"
+authors: "Mayank"
+authors: "Rohit"
+authors: "Ashwin"
+
+affiliation: "GaTech and UIUC"
+description: "MMDetection running with cascade RCNN, and Depth"
+
+method_link: "github.com/openlab/mmdetection"
+
+# See submission.proto for allowed types.
+sensor_type: CAMERA_ALL
+
+object_types: TYPE_VEHICLE
+object_types: TYPE_PEDESTRIAN
+object_types: TYPE_CYCLIST
+
+# Inference latency in seconds.
