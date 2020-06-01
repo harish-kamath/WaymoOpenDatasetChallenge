@@ -1,4 +1,4 @@
-**Waymo Open Dataset Challenge: 2D Detection**
+# **Waymo Open Dataset Challenge: 2D Detection**
 
 Harish Kamath, Rohit Mittapalli, Aman Kishore, Ashwin Rathie, Mayank
 Kishore
@@ -6,7 +6,7 @@ Kishore
 Georgia Institute of Technology and University of Illinois Urbana
 Champaign
 
-Background
+## Background
 
 We are a group of Computer Scientists and Computer Engineers from
 Georgia Tech and UIUC highly interested in autonomous technology. The
@@ -15,7 +15,7 @@ learned through research and industry experience to train the best model
 possible. We had a lot of fun working through the challenges of this
 problem and wish the best of luck to all of the other teams!
 
-Dataset & Pre-processing
+## Dataset & Pre-processing
 
 Dataset was provided to us in tfrecords and we decided to convert it to
 a COCO format for more ease of use with existing models.
@@ -27,7 +27,7 @@ a COCO format for more ease of use with existing models.
     > to write a python script to convert the data to COCO format for
     > easy use with the mmdetection library \[2\].
 
-Initial Visualization with Out of Box Models
+## Initial Visualization with Out of Box Models
 
 To make sure we were selecting a good out of box model, we tested the
 models with a small subset of the data to determine if our model would
@@ -36,21 +36,20 @@ visualize our bounding box results. After testing a few initial models
 from paperswithcode.com, we were able to decide on the Cascade R-CNN
 model. With this initial step done, we dove deeper into the research to
 ensure that our model's initial parameters would ensure the best
-results.![](.//media/image3.png){width="4.578125546806649in"
-height="3.0492366579177603in"}
+results.![](.//media/image3.png)
 
-Model Selection
+## Model Selection
 
 We selected the Cascade R-CNN model and the implementation is based off
 of the popular mmdetection library \[2\], available with a lot of out of
 box models for easy deployment. We reviewed the top models on
-[[https://paperswithcode.com/task/object-detection]{.underline}](https://paperswithcode.com/task/object-detection)
+[https://paperswithcode.com/task/object-detection](https://paperswithcode.com/task/object-detection)
 and decided that Cascade R-CNN would give us the best results without
 having to change a lot of the base model settings due to our initial
 visualizations. That being said, our pipeline consisted of the
 following:
 
--   Backbone model of SpineNet \[3\]
+### -   Backbone model of SpineNet \[3\]
 
     -   The architecture consists of a fixed stem network followed by a
         > learned scale permuted network. A scale-permuted network is
@@ -64,7 +63,7 @@ following:
         > the model has posted results of outpacing the traditionally
         > excellent ResNet model as a great backbone model.
 
--   Cascade R-CNN \[4\]
+### -   Cascade R-CNN \[4\]
 
     -   We chose this model because the use of cascade regression as a
         > resamploing mechanism allows for an IoU threshold of 0.7,
@@ -86,7 +85,7 @@ following:
         > applied at inference, to eliminate quality mismatches between
         > hypotheses and detectors.
 
-Model Improvement
+## Model Improvement
 
 Our initial test yielded poor results with SpineNet, so we reverted back
 to a more familiar model that has been tried and tested, ResNet. In
@@ -95,7 +94,7 @@ faster run time. This allowed the model to train much faster and give us
 a higher precision in the end. We also changed it so that the model
 would run for 30 epochs on every camera
 
--   ResNet \[5\]
+### -   ResNet \[5\]
 
     -   We switched back to ResNet as the backbone for our Cascade R-CNN
         > as we determined that it would be a more reliable way to train
@@ -111,7 +110,7 @@ would run for 30 epochs on every camera
         > the added complexity of ResNet-101 would be too inefficient to
         > be worth the higher precision.
 
-Considerations
+## Considerations
 
 Moving forward, if given more time, we would have liked to try to train
 our model for an increased number of epochs and an increased number of
@@ -131,7 +130,7 @@ bounding boxes with an overall advantageous IoU threshold which would
 have ultimately allowed for an increase in overall mAP over the Vehicle,
 Pedestrian, and Cyclist classes.
 
-3D Object Detection and Domain Adaptation
+## 3D Object Detection and Domain Adaptation
 
 In addition to creating a robust 2D detection model, we also wanted to
 see if we could create a depth map with our inputted images in order to
@@ -149,18 +148,16 @@ In order to map our 2D results, which are in the Camera frame, to 3D
 results, which are in the Vehicle Frame, we utilized the intrinsics and
 extrinsics according to the following formulas.
 
-![](.//media/image2.png){width="3.5989588801399823in"
-height="1.5860793963254594in"}
+![](.//media/image2.png)
 
 Eq. 1 \[9\]
 
-![](.//media/image1.png){width="2.7534416010498686in"
-height="0.9947922134733158in"}
+![](.//media/image1.png)
 
 Eq. 2: Where K is the calibration (intrinsic) matrix and \[R\|t\] is the
 extrinsic matrix
 
-Results
+## Results
 
 We trained our model on 5 GCP instances to maximize the amount of data
 that was processed. We used the Tesla V100 GPU to train our models to
@@ -169,31 +166,31 @@ within a week. Each GCP instance took one of the 5 cameras and ran for
 30 epochs which yielded an mAP of \_\_\_ for Vehicles, \_\_\_ for
 Pedestrians, and \_\_\_ for cyclists.
 
-References
+## References
 
 \[1\]
-[[https://github.com/RalphMao/Waymo-Dataset-Tool]{.underline}](https://github.com/RalphMao/Waymo-Dataset-Tool)
+[https://github.com/RalphMao/Waymo-Dataset-Tool](https://github.com/RalphMao/Waymo-Dataset-Tool)
 
 \[2\]
-[[https://github.com/open-mmlab/mmdetection]{.underline}](https://github.com/open-mmlab/mmdetection)
+[https://github.com/open-mmlab/mmdetection](https://github.com/open-mmlab/mmdetection)
 
 \[3\]
-[[https://arxiv.org/abs/1912.05027]{.underline}](https://arxiv.org/abs/1912.05027)
+[https://arxiv.org/abs/1912.05027](https://arxiv.org/abs/1912.05027)
 
 \[4\]
-[[https://arxiv.org/pdf/1712.00726]{.underline}](https://arxiv.org/pdf/1712.00726.pdf)
+[https://arxiv.org/pdf/1712.00726](https://arxiv.org/pdf/1712.00726.pdf)
 
 \[5\]
-[[https://arxiv.org/abs/1512.03385]{.underline}](https://arxiv.org/abs/1512.03385)
+[https://arxiv.org/abs/1512.03385](https://arxiv.org/abs/1512.03385)
 
 \[6\]
-[[https://arxiv.org/pdf/1912.04838.pdf]{.underline}](https://arxiv.org/pdf/1912.04838.pdf)
+[https://arxiv.org/pdf/1912.04838.pdf](https://arxiv.org/pdf/1912.04838.pdf)
 
 \[7\]
-[[https://arxiv.org/pdf/1906.09756]{.underline}](https://arxiv.org/pdf/1906.09756.pdf)
+[https://arxiv.org/pdf/1906.09756](https://arxiv.org/pdf/1906.09756.pdf)
 
 \[8\]
-[[https://arxiv.org/pdf/1806.01260.pdf]{.underline}](https://arxiv.org/pdf/1806.01260.pdf)
+[https://arxiv.org/pdf/1806.01260.pdf](https://arxiv.org/pdf/1806.01260.pdf)
 
 \[9\]
-[[http://www.cs.cmu.edu/\~16385/s17/Slides/11.1\_Camera\_matrix.pdf]{.underline}](http://www.cs.cmu.edu/~16385/s17/Slides/11.1_Camera_matrix.pdf)
+[http://www.cs.cmu.edu/\~16385/s17/Slides/11.1\_Camera\_matrix.pdf](http://www.cs.cmu.edu/~16385/s17/Slides/11.1_Camera_matrix.pdf)
