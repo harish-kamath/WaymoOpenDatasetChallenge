@@ -163,8 +163,8 @@ We trained our model on 5 GCP instances to maximize the amount of data
 that was processed. We used the Tesla V100 GPU to train our models to
 minimize the time spent training and were able to finish the 30 epochs
 within a week. Each GCP instance took one of the 5 cameras and ran for
-30 epochs which yielded an mAP of \_\_\_ for Vehicles, \_\_\_ for
-Pedestrians, and \_\_\_ for cyclists.
+30 epochs which yielded an mAP of 50.76% for Vehicles, 49.94% for
+Pedestrians, and 32.25% for Cyclists.
 
 ## References
 
